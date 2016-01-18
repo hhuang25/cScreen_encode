@@ -48,10 +48,69 @@ public class ImageEncoderTest {
 			BufferedImage img1 = encoder.getImageFromPath(path + "img1.jpg");	
 			BufferedImage img2 = encoder.getImageFromPath(path + "img2.jpg");
 			//TODO: rest of the test
+			long startTime = System.currentTimeMillis();
+			BufferedImage diff = encoder.getImageDifference(img1, img2);
+			long stopTime = System.currentTimeMillis();
+			long elapsed = stopTime - startTime;
+			System.out.println(String.format("Time elapsed: %d milliseconds", elapsed));
+			encoder.writeBufferedImageToFile(diff, path + "out12.jpg");
 		}
 		catch(Exception ex){
 			Assert.fail(ex.getMessage());
 		}
 		Assert.assertTrue(true);
+	}
+
+	@Test
+	public void testGetBMPDifference() {
+		try{
+			String path = resFolder;
+			BufferedImage img1 = encoder.getImageFromPath(path + "type1.bmp");
+			BufferedImage img2 = encoder.getImageFromPath(path + "type2.bmp");
+			//TODO: rest of the test
+			long startTime = System.currentTimeMillis();
+			BufferedImage diff = encoder.getImageDifference(img1, img2);
+			long stopTime = System.currentTimeMillis();
+			long elapsed = stopTime - startTime;
+			System.out.println(String.format("Time elapsed: %d milliseconds", elapsed));
+			encoder.writeBufferedImageToFile(diff, path + "typeout12.bmp", "bmp");
+		}
+		catch(Exception ex){
+			Assert.fail(ex.getMessage());
+		}
+		Assert.assertTrue(true);
+	}
+	
+	@Test
+	public void testGetBMPDifferenceFast() {
+		try{
+			String path = resFolder;
+			BufferedImage img1 = encoder.getImageFromPath(path + "type1.bmp");
+			BufferedImage img2 = encoder.getImageFromPath(path + "type2.bmp");
+			//TODO: rest of the test
+			long startTime = System.currentTimeMillis();
+			BufferedImage diff = encoder.getImageDifferenceFast(img1, img2);
+			long stopTime = System.currentTimeMillis();
+			long elapsed = stopTime - startTime;
+			System.out.println(String.format("Time elapsed: %d milliseconds", elapsed));
+			encoder.writeBufferedImageToFile(diff, path + "typeout12.bmp", "bmp");
+		}
+		catch(Exception ex){
+			Assert.fail(ex.getMessage());
+		}
+		Assert.assertTrue(true);	
+	}
+	
+	@Test
+	public void testBufferedImageVsBytes() {
+		try{
+			BufferedImage img1 = encoder.getImageFromPath(resFolder + "type1.bmp");
+			byte[] bytes = encoder.convertBufferedImageToBytes(img1, "bmp");
+			
+		}
+		catch(Exception ex){
+			Assert.fail(ex.getMessage());
+		}
+		Assert.assertTrue(true);		
 	}
 }
