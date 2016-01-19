@@ -87,27 +87,8 @@ public class Encoder {
 	            	// i.e. nothing changed
 	            	result = 0;
 	            }else{
-	            	int r2 = (rgb2 >> 16) & 0xff;
-		            int g2 = (rgb2 >> 8) & 0xff;
-		            int b2 = (rgb2) & 0xff;
-		            result = (r2 << 16) | (g2 << 8) | b2;
+	            	result = rgb2;
 	            }
-//	            int r1 = (rgb1 >> 16) & 0xff;
-//	            int g1 = (rgb1 >> 8) & 0xff;
-//	            int b1 = (rgb1) & 0xff;
-//	            int r2 = (rgb2 >> 16) & 0xff;
-//	            int g2 = (rgb2 >> 8) & 0xff;
-//	            int b2 = (rgb2) & 0xff;
-//	            diff = (r2 - r1); // Change
-//	            result = 0x00000000 | (diff << 16);
-//	            diff = (g2 - g1);
-//	            result = result | (0x00000000 | (diff << 8));
-//	            diff = (b2 - b1);
-//	            result = result | (0x00000000 | (diff));
-	            //diff /= 3; // Change - Ensure result is between 0 - 255
-	            // Make the difference image gray scale
-	            // The RGB components are all the same
-	            //result = (diff << 16) | (diff << 8) | diff;
 	            outImg.setRGB(j, i, result); // Set result
 	        }
 	    }
@@ -144,10 +125,7 @@ public class Encoder {
 	    	result = new int[width1];
 	    	for(int j = 0; j < width1; j++){
 				if(rgb1[j] != rgb2[j]){
-    				int r2 = (rgb2[j] >> 16) & 0xff;
-		            int g2 = (rgb2[j] >> 8) & 0xff;
-		            int b2 = (rgb2[j]) & 0xff;
-		            result[j] = (r2 << 16) | (g2 << 8) | b2;
+		            result[j] = rgb2[j];
     			}
     		}
 	    	outImg.setRGB(0, i, width1, 1, result, 0, width1);
