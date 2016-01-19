@@ -102,13 +102,21 @@ public class ImageEncoderTest {
 	}
 	
 	@Test
-	public void testBufferedImageVsBytes() {
+	public void testGetBytesDifference() {
 		try{
 			BufferedImage img1 = encoder.getImageFromPath(resFolder + "type1.bmp");
-			byte[] bytes = encoder.convertBufferedImageToBytes(img1, "bmp");
-			
+			byte[] bytes1 = encoder.convertBufferedImageToBytes(img1, "bmp");
+			BufferedImage img2 = encoder.getImageFromPath(resFolder + "type2.bmp");
+			byte[] bytes2 = encoder.convertBufferedImageToBytes(img2, "bmp");
+			long startTime = System.currentTimeMillis();
+			byte[] diff = encoder.getByteDifference(bytes1, bytes2);
+			long stopTime = System.currentTimeMillis();
+			long elapsed = stopTime - startTime;
+			System.out.println(String.format("Time elapsed: %d milliseconds", elapsed));
+			encoder.writeBufferedImageToFile(encoder.convertBytesToImage(diff), resFolder + "typeout12.bmp", "bmp");
 		}
 		catch(Exception ex){
+			System.out.println(ex.getMessage());
 			Assert.fail(ex.getMessage());
 		}
 		Assert.assertTrue(true);		

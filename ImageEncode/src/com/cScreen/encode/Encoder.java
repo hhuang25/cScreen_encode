@@ -136,4 +136,32 @@ public class Encoder {
 		
 	    return outImg;
 	}
+	
+	public byte[] getByteDifference(byte[] img1, byte[] img2)
+	{
+		int length1 = img1.length;
+		int length2 = img2.length;
+		if(length1 != length2){
+			System.err.println("Error: Images dimensions mismatch");
+	        System.exit(1);
+		}
+		
+		long startTime = System.currentTimeMillis();
+		
+		byte[] outImg = new byte[length1];
+		for(int i = 0; i < 36; i++){
+			outImg[i] = img2[i];
+		}
+		for(int i = 36; i < length1; i++){
+			if (img1[i] != img2[i]){
+				outImg[i] = img2[i];
+			}
+		}
+		
+		long stopTime = System.currentTimeMillis();
+		long elapsed = stopTime - startTime;
+		System.out.println(String.format("Time spent in loop: %d milliseconds", elapsed));
+		
+		return outImg;
+	}
 }
