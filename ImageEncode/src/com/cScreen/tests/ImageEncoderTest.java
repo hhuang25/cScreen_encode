@@ -110,10 +110,11 @@ public class ImageEncoderTest {
 			byte[] bytes2 = encoder.convertBufferedImageToBytes(img2, "bmp");
 			long startTime = System.currentTimeMillis();
 			byte[] diff = encoder.getByteDifference(bytes1, bytes2);
+			byte[] output = encoder.createNewImage(bytes1, diff);
 			long stopTime = System.currentTimeMillis();
 			long elapsed = stopTime - startTime;
 			System.out.println(String.format("Time elapsed: %d milliseconds", elapsed));
-			encoder.writeBufferedImageToFile(encoder.convertBytesToImage(diff), resFolder + "typeout12.bmp", "bmp");
+			encoder.writeBufferedImageToFile(encoder.convertBytesToImage(output), resFolder + "typeout12.bmp", "bmp");
 		}
 		catch(Exception ex){
 			System.out.println(ex.getMessage());

@@ -164,4 +164,20 @@ public class Encoder {
 		
 		return outImg;
 	}
+	
+	public byte[] createNewImage(byte[] img1, byte[] difference)
+	{
+		int length1 = img1.length;
+		int length2 = difference.length;
+		if(length1 != length2){
+			System.err.println("Error: Images dimensions mismatch");
+	        System.exit(1);
+		}
+		for(int i = 36; i < length1; i++){
+			if(difference[i] != 0){
+				img1[i] = difference[i];
+			}
+		}
+		return img1;
+	}
 }
